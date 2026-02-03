@@ -48,3 +48,20 @@ class Serie extends Multimedia {
         return this.get_views() * this.nombre_episodis * 0.05;
     }
 }     
+
+class Usuari {
+    mylist = [];
+
+    afegirALista(item) {
+        this.mylist.push(item);
+    }
+
+    tempsTotalConsumit() {
+        let minuts = 0;
+
+        for (const item of this.mylist) {
+            minuts += item.durada;
+            return minuts / 60;
+        }
+    }
+}

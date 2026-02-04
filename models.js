@@ -1,4 +1,4 @@
-class Multimedia {
+export class Multimedia {
     #views = 0;
 
     constructor(titol, durada) {
@@ -11,7 +11,7 @@ class Multimedia {
         this.#views += 1;
     }
 
-    get_views() {
+    getViews() {
         return this.#views;
     }
     
@@ -19,7 +19,8 @@ class Multimedia {
        return this.durada * 0.01;
     }
 }
-class Peli extends Multimedia {
+
+export class Pelicula extends Multimedia {
 
     constructor(titol, durada, any, costFix) {
         super(titol, durada);
@@ -28,15 +29,15 @@ class Peli extends Multimedia {
     }
     
     calcularRoyalties(){
-        return this.get_views * this.costFix;
+        return this.getViews * this.costFix;
     }
 }
 
-class Serie extends Multimedia {
+export class Serie extends Multimedia {
 
-    constructor(titol, durada, nombre_episodis) {
+    constructor(titol, durada, nombreEpisodis) {
         super(titol, durada);
-        this.nombre_episodis = nombre_episodis;
+        this.nombreEpisodis = nombreEpisodis;
     }
 
     play() {
@@ -45,14 +46,14 @@ class Serie extends Multimedia {
     }
 
     calcularRoyalties() {
-        return this.get_views() * this.nombre_episodis * 0.05;
+        return (this.getViews() * this.nombreEpisodis) * 0.05;
     }
 }     
 
-class Usuari {
+export class Usuari {
     mylist = [];
 
-    afegirALista(item) {
+    afegirALlista(item) {
         this.mylist.push(item);
     }
 

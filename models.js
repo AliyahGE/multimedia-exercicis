@@ -29,7 +29,7 @@ export class Pelicula extends Multimedia {
     }
     
     calcularRoyalties(){
-        return this.getViews * this.costFix;
+        return this.getViews() * this.costFix;
     }
 }
 
@@ -38,31 +38,34 @@ export class Serie extends Multimedia {
     constructor(titol, durada, nombreEpisodis) {
         super(titol, durada);
         this.nombreEpisodis = nombreEpisodis;
+        this.durada = durada * nombreEpisodis;
     }
 
     play() {
         super.play();
-        return "Marató de" + this.titol + "iniciada";
+        return "Marató";
     }
 
     calcularRoyalties() {
-        return (this.getViews() * this.nombreEpisodis) * 0.05;
+        return this.getViews() * this.nombreEpisodis * 0.05;
     }
 }     
 
 export class Usuari {
-    mylist = [];
+    constructor(myList){
+        this.myList = [];
+    }
 
     afegirALlista(item) {
-        this.mylist.push(item);
+        this.myList.push(item);
     }
 
     tempsTotalConsumit() {
         let minuts = 0;
 
-        for (const item of this.mylist) {
+        for (const item of this.myList) {
             minuts += item.durada;
-            return minuts / 60;
         }
+        return ((minuts / 60).toFixed(2)/1);
     }
 }

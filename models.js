@@ -1,4 +1,4 @@
-class Multimedia {
+export class Multimedia {
     #views = 0;
 
     constructor(titol, durada) {
@@ -11,11 +11,61 @@ class Multimedia {
         this.#views += 1;
     }
 
-    get_views() {
+    getViews() {
         return this.#views;
     }
     
     #calcularCostServer() {
        return this.durada * 0.01;
+    }
+}
+
+export class Pelicula extends Multimedia {
+
+    constructor(titol, durada, any, costFix) {
+        super(titol, durada);
+        this.any = any;
+        this.costFix = costFix;
+    }
+    
+    calcularRoyalties(){
+        return this.getViews() * this.costFix;
+    }
+}
+
+export class Serie extends Multimedia {
+
+    constructor(titol, durada, nombreEpisodis) {
+        super(titol, durada);
+        this.nombreEpisodis = nombreEpisodis;
+        this.durada = durada * nombreEpisodis;
+    }
+
+    play() {
+        super.play();
+        return "Marató";
+    }
+
+    calcularRoyalties() {
+        return this.getViews() * this.nombreEpisodis * 0.05;
+    }
+}     
+
+export class Usuari {
+    constructor(myList){
+        this.myList = [];
+    }
+
+    afegirALlista(item) {
+        this.myList.push(item);
+    }
+
+    tempsTotalConsumit() {
+        let minuts = 0;
+
+        for (const item of this.myList) {
+            minuts += item.durada;
+        }
+        return ((minuts / 60).toFixed(2)/1);
     }
 }
